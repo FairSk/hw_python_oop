@@ -104,7 +104,7 @@ class Swimming(Training):
 
     def get_spent_calories(self):
         return ((self.get_mean_speed()
-                + self.SPEED_ADDENDUM)
+                 + self.SPEED_ADDENDUM)
                 * self.SPEED_MULTIPLIER
                 * self.weight)
 
@@ -114,18 +114,18 @@ WORKOUT_TYPES = {
     'RUN': Running,
     'WLK': SportsWalking}
 
-KEY_ERROR_PHRASE = 'There is no training type called {} in system.'
-TYPE_ERROR_PHRASE = ('Wrong number of given arguments. '
-                     'This class takes exactly {} arguments ({} given).')
+VALUE_ERROR_PHRASE_1 = 'Unexprcted value {}.'
+VALUE_ERROR_PHRASE_2 = ('Wrong number of given arguments. '
+                        'This class takes exactly {} arguments ({} given).')
 
 
 def read_package(workout_type: str, data) -> Training:
     """Прочитать данные полученные от датчиков."""
     if workout_type not in WORKOUT_TYPES:
-        raise KeyError(KEY_ERROR_PHRASE.format(workout_type))
+        raise KeyError(VALUE_ERROR_PHRASE_1.format(workout_type))
 
     if len(data) != len(fields(WORKOUT_TYPES[workout_type])):
-        raise TypeError(TYPE_ERROR_PHRASE.format(
+        raise TypeError(VALUE_ERROR_PHRASE_2.format(
             len(fields(WORKOUT_TYPES[workout_type])),
             len(data)))
 
